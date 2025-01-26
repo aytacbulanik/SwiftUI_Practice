@@ -10,41 +10,40 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack(spacing : 20) {
-            Text("Button Örnek - 1 ")
+            Text("Button Örnek - 2 ")
                 .font(.largeTitle)
-            Text("Giriş")
-                .font(.title)
+            Text("Text Birleştirme")
                 .foregroundStyle(Color.gray)
-            Text("Eğer sadace metinden ibaret bir botun oluşturmak istiyorsanız o metni parametre oalrak göndermeniz yeterli")
+            Text("Butonun yazılarına birden fazla tezt ekleyebiliriz.Varsayılan olarak HStack olarak görünecektir.")
                 .padding()
-                .font(.title)
                 .frame(maxWidth: .infinity)
-                .background(Color.red)
-                
-            Button("Varsayılan Buton Tipi") {
-                
-            } //sadece metin ile buton oluşturuldu
-            Text("Butonun üzerindeki yazıyı isteğinize göre düzenleyebilirsiniz.")
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.red)
+                .background(Color.orange)
                 .font(.title)
+                .foregroundStyle(Color.white)
+            // Butonun yazılarına birden fazla tezt ekleyebiliriz.Varsayılan olarak HStack olarak görünecektir.
             Button(action: {}) {
-                Text("Buton Metni")
+                Text("Yeni Kullanıcı")
                     .font(.title)
-                    .fontWeight(.bold)
-            } //label parametresine text göndererek istediğimiz ayarları yapıp butonu oluşturabiliriz.
-            
+                Text("(Kayıt Ol)")
+            }
+            Text("VStack Yapısı")
+                .padding()
+                .frame(maxWidth: .infinity)
+                .font(.largeTitle)
+                .background(Color.purple)
+                .foregroundStyle(Color.white)
+            // bu button içerisine vstack koyarsak metinler alt alta hizalanır.
             Button(action: {}) {
-                Text("Yeşil Renk")
-                    .foregroundStyle(Color.green)
-                    .font(.title2)
-                    .padding()
-            } // burada da renkli bir button oluşturuldu.
-            
+                VStack{
+                    Text("Parolanımı Unuttun ?")
+                        .font(.title)
+                    Text("Sıfırlamak İstiyorum")
+                }
+                .foregroundStyle(Color.black)
+            }
+               
         }.frame(maxWidth: .infinity)
-        .background(Color.black)
-            .foregroundStyle(Color.white)
+        
        
     }
 }
