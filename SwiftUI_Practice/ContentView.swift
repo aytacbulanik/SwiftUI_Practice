@@ -9,40 +9,36 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(spacing : 20) {
-            Text("Button Örnek - 2 ")
+        VStack(spacing : 50) {
+            Text("Button Örnek - 3 ")
                 .font(.largeTitle)
-            Text("Text Birleştirme")
-                .foregroundStyle(Color.gray)
-            Text("Butonun yazılarına birden fazla tezt ekleyebiliriz.Varsayılan olarak HStack olarak görünecektir.")
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.orange)
+            Text("Arka Planlı Butonlar")
                 .font(.title)
-                .foregroundStyle(Color.white)
-            // Butonun yazılarına birden fazla tezt ekleyebiliriz.Varsayılan olarak HStack olarak görünecektir.
-            Button(action: {}) {
-                Text("Yeni Kullanıcı")
-                    .font(.title)
-                Text("(Kayıt Ol)")
-            }
-            Text("VStack Yapısı")
+                .foregroundStyle(Color.gray)
+            Text("SwiftUI ile arka planlı butonlar yapıp gölge ekleyebiliriz.")
                 .padding()
                 .frame(maxWidth: .infinity)
                 .font(.largeTitle)
                 .background(Color.purple)
-                .foregroundStyle(Color.white)
-            // bu button içerisine vstack koyarsak metinler alt alta hizalanır.
             Button(action: {}) {
-                VStack{
-                    Text("Parolanımı Unuttun ?")
-                        .font(.title)
-                    Text("Sıfırlamak İstiyorum")
-                }
-                .foregroundStyle(Color.black)
+                Text("Sade Button")
+                    .padding()
+                    .background(Color.purple)
+                    .font(.title)
+                    .cornerRadius(15)
+            }
+            Button(action: {}) {
+                Text("Gölgelerin Gücü Adına")
+                    .padding()
+                    .font(.title)
+                    .background(Color.purple)
+                    .cornerRadius(20)
+                    .shadow(color: Color.purple,radius: 10,x: 5,y: 5) // gölge vermeye yarıyor.radius kaç birim yarıçaplı bir gölge oluşturur x ve y değerleri ise sağa ve aşağı kaymasını sağlar butonun
             }
                
-        }.frame(maxWidth: .infinity)
+        }.frame(maxWidth: .infinity, maxHeight : .infinity)
+            .background(Color.black)
+            .foregroundStyle(Color.white)
         
        
     }
