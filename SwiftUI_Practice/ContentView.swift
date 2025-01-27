@@ -10,32 +10,24 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack(spacing : 50) {
-            Text("Button Örnek - 3 ")
-                .font(.largeTitle)
-            Text("Arka Planlı Butonlar")
-                .font(.title)
-                .foregroundStyle(Color.gray)
-            Text("SwiftUI ile arka planlı butonlar yapıp gölge ekleyebiliriz.")
-                .padding()
-                .frame(maxWidth: .infinity)
-                .font(.largeTitle)
-                .background(Color.purple)
+            Text("Button Örnek - 4 ")
+                   
             Button(action: {}) {
-                Text("Sade Button")
+                Text("Kenarlıklı Button")
                     .padding()
-                    .background(Color.purple)
-                    .font(.title)
-                    .cornerRadius(15)
-            }
-            Button(action: {}) {
-                Text("Gölgelerin Gücü Adına")
+                    .font(.largeTitle)
+                    .background(Color.orange)
+                    .border(.white, width: 4)
+            }// kare bir kenarlık verilerek button oluşturulmuş olduk
+            
+            Button(action : {}) {
+                Text("Yuvarlak kenarlıklı Button")
                     .padding()
                     .font(.title)
-                    .background(Color.purple)
-                    .cornerRadius(20)
-                    .shadow(color: Color.purple,radius: 10,x: 5,y: 5) // gölge vermeye yarıyor.radius kaç birim yarıçaplı bir gölge oluşturur x ve y değerleri ise sağa ve aşağı kaymasını sağlar butonun
-            }
-               
+                    .background(RoundedRectangle(cornerRadius: 20).stroke(Color.orange, lineWidth: 4))
+            } // arkaplana bir stil vererek border lı ve yuvarlak bir button elde etmiş olduk
+            
+            
         }.frame(maxWidth: .infinity, maxHeight : .infinity)
             .background(Color.black)
             .foregroundStyle(Color.white)
