@@ -10,23 +10,22 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack(spacing : 50) {
-            Text("Button Örnek - 4 ")
-                   
-            Button(action: {}) {
-                Text("Kenarlıklı Button")
-                    .padding()
-                    .font(.largeTitle)
-                    .background(Color.orange)
-                    .border(.white, width: 4)
-            }// kare bir kenarlık verilerek button oluşturulmuş olduk
+            Text("Button Örnek - 5 ")
+            //sfsymbols ile butonlar bir arada kullanma
+            Button(action: {}){
+                Text("Ara")
+                Image(systemName: "arrowshape.forward")
+            }.padding()
+            .font(.largeTitle)
+                .background(Color.orange)
             
-            Button(action : {}) {
-                Text("Yuvarlak kenarlıklı Button")
-                    .padding()
-                    .font(.title)
-                    .background(RoundedRectangle(cornerRadius: 20).stroke(Color.orange, lineWidth: 4))
-            } // arkaplana bir stil vererek border lı ve yuvarlak bir button elde etmiş olduk
-            
+            Button(action: {}){
+                VStack{
+                    Text("Kaydı Başlat")
+                    Image(systemName: "video")}
+            }.padding()
+            .font(.largeTitle)
+                .background(Color.orange)
             
         }.frame(maxWidth: .infinity, maxHeight : .infinity)
             .background(Color.black)
