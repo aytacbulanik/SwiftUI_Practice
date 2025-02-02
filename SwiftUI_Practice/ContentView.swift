@@ -8,29 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var tarihVerisi = Date()
+    
     var body: some View {
         VStack(spacing : 50) {
-            Text("Button Örnek - 5 ")
-            //sfsymbols ile butonlar bir arada kullanma
-            Button(action: {}){
-                Text("Ara")
-                Image(systemName: "arrowshape.forward")
-            }.padding()
-            .font(.largeTitle)
-                .background(Color.orange)
+            Text("Date picker Örnek - 1")
+                .font(.largeTitle)
+                .foregroundStyle(Color.orange)
             
-            Button(action: {}){
-                VStack{
-                    Text("Kaydı Başlat")
-                    Image(systemName: "video")}
-            }.padding()
-            .font(.largeTitle)
-                .background(Color.orange)
+            Text("Datepicker nesnesinden bir değer almak yada değer atamak için değişken atamalıyız.")
+                .frame(maxWidth : .infinity)
+                .padding()
+                .background(Color.red)
+                .foregroundStyle(Color.white)
+                .font(.title)
             
-        }.frame(maxWidth: .infinity, maxHeight : .infinity)
-            .background(Color.black)
-            .foregroundStyle(Color.white)
-        
+        }
+        HStack{
+            DatePicker("Tarihi seçiniz : ",selection: $tarihVerisi, displayedComponents: .date)
+        }
        
     }
 }
