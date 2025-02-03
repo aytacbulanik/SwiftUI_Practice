@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var tarihVerisi = Date()
-    
+    @State private var saatVerisi = Date()
+    let dun = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    let yarin = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
     var body: some View {
         VStack(spacing : 50) {
             Text("Date picker Örnek - 1")
@@ -24,10 +26,15 @@ struct ContentView: View {
                 .font(.title)
             
         }
-        HStack{
-            DatePicker("Tarihi seçiniz : ",selection: $tarihVerisi, displayedComponents: .date)
+        HStack (alignment: .center) {
+                // in parametresine bir closterrange giriyoruz. bitişe bugünü atadığımız için bugün tarih ve saatinde daha ileride birşey seçilemez.
+            DatePicker("", selection: $tarihVerisi , in: dun...yarin , displayedComponents: .date)
+                .environment(\.locale, Locale(identifier: "tr_TR")) // görüntülenecek zamanı türkçe olarak değiştiriyor.
+                .background(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 4)) // bu ayar pickeri sarmalayan bir kenarlık oluşturmaya yarıyor.
+                .padding()
+                
         }
-       
+        Spacer()
     }
 }
 
