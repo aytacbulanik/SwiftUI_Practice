@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @State var count = 0
     var body: some View {
-        Text("Merhaba")
+        NavigationStack {
+            
+            Form{
+                Section {
+                    Text("Bana Basıldı : \(count)")
+                }
+            }
+            Button("Bana Bas"){
+                count += 1
+            }
+            .navigationTitle("SwiftUI")
+            .navigationBarTitleDisplayMode(.large)
+        }
     }
 }
 
