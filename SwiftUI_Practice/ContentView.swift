@@ -11,17 +11,12 @@ struct ContentView: View {
     @State var count = ""
     var body: some View {
         Form {
-            Section(header: Text("FORM").font(.largeTitle)) {
-                Text("Form içerisinde bulunan view lara ayrı bir methodla background verilebilir.")
-                    .listRowBackground(Color.black) // bu method ile tüm satıra renk verilir background methodunda ise sadece textin kapladığı alana renk verilir.
-                    .foregroundStyle(.white)
+            Section(header: Text("Bu inset Metodu").font(.largeTitle)) {
+                Text("herbir satıra istediğimiz gibi girinti yada çıkıntı verebiliriz.")
+                Color.red.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0)) // bir viewe inset metoduyla kenarlardan ne kadar boşluk bırakması gerektiğini ayarlayabiliriz.
+                Text("herbir satıra istediğimiz gibi girinti yada çıkıntı verebiliriz.")
+                    .listRowInsets(.init(top: 0, leading: 30, bottom: 0, trailing: 0)) // tek başına istediğimiz değerleri girerek sınırları belirleriz
             }
-            
-            Section(header: Text("Bu farklı bir").font(.largeTitle)) {
-                Text("Deneme satırı")
-                Text("Bu ise başka bir satır olacak bakalım hepsine birden renk ataması yapılabilecek mi ? ")
-            }
-            .listRowBackground(Color.green)
         }
     }
 }
