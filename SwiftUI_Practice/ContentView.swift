@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var count = 0
+    @State var count = ""
     var body: some View {
-        NavigationStack {
+        Form {
+            Section {
+                Text("Bu bir Formdur")
+                    .font(.largeTitle)
+                    .foregroundStyle(.red)
+                Text("Bu form nesneleri alt alta sıralanırlar ve uzunluklarına göre alt alta sıralanırlar. sığmadıkları yerde alta eklenir.")
+            }
+            Section{
+                Text("BU İKİNCİ FORM")
+                    .font(.title)
+                    .foregroundStyle(.blue)
+                Text("şimdi istediğimiz kadar view ekleyebiliriz buraya kadar")
+                Rectangle()
+                    .foregroundStyle(.red)
+            }
             
-            Form{
-                Section {
-                    Text("Bana Basıldı : \(count)")
-                }
-            }
-            Button("Bana Bas"){
-                count += 1
-            }
-            .navigationTitle("SwiftUI")
-            .navigationBarTitleDisplayMode(.large)
         }
     }
 }
