@@ -10,32 +10,40 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // segmented değerlerini yakalamak için değişkenler oluşturuluyor.
-    @State private var segmentedState = "Gündüz"
-    @State private var segmentedIndex = 1
+    @State private var value = 2
+    
+    func nextPrime(after n: Int) -> Int {
+        var x = n + 1
+        while !isPrime(x) { x += 1 }
+        return x
+    }
+    func previousPrime(before n: Int) -> Int {
+        var x = max(2, n - 1)
+        while x > 2 && !isPrime(x) { x -= 1 }
+        return x
+    }
+    func isPrime(_ n: Int) -> Bool {
+        if n < 2 { return false }
+        for i in 2...Int(Double(n).squareRoot()) {
+            if n % i == 0 { return false }
+        }
+        return true
+    }
+    
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            Text("Segmented Controller Örenk - 1")
-            // text ile picker elemanları oluşturuluyor.
-            Picker("", selection: $segmentedState) {
-                Text("Gündüz").tag("Gündüz")
-                Text("Gece").tag("Gece")
-            }.pickerStyle(.segmented) // bu değeri girince segmented controller a dönüşüyor.
-                .padding()
-            Text("Resim ile oluşturulabilir.")
-                .font(.headline)
-            
-            // image ile picker oluşturuluyor.
-            Picker("", selection: $segmentedIndex) {
-                Image(systemName: "sun.min").tag(0)
-                Image(systemName: "moon").tag(1)
-            }.pickerStyle(.segmented)
-                .padding(.horizontal)
+        
+        Stepper {
+            Text("Asal: \(value)")
+        } onIncrement: {
+            value = nextPrime(after: value)
+        } onDecrement: {
+            value = previousPrime(before: value)
         }
+        .padding()
     }
 }
+
 
 
 #Preview {
