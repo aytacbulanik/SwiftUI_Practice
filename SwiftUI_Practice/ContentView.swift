@@ -10,40 +10,25 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var value = 2
-    
-    func nextPrime(after n: Int) -> Int {
-        var x = n + 1
-        while !isPrime(x) { x += 1 }
-        return x
-    }
-    func previousPrime(before n: Int) -> Int {
-        var x = max(2, n - 1)
-        while x > 2 && !isPrime(x) { x -= 1 }
-        return x
-    }
-    func isPrime(_ n: Int) -> Bool {
-        if n < 2 { return false }
-        for i in 2...Int(Double(n).squareRoot()) {
-            if n % i == 0 { return false }
-        }
-        return true
-    }
-    
-    
     var body: some View {
+        TextView()
         
-        Stepper {
-            Text("Asal: \(value)")
-        } onIncrement: {
-            value = nextPrime(after: value)
-        } onDecrement: {
-            value = previousPrime(before: value)
-        }
-        .padding()
     }
 }
 
+struct TextView : View {
+    var body: some View {
+        VStack {
+            Text("Merhaba Deneme")
+            Image("image-sun")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding(10)
+                .cornerRadius(50)
+        }
+       
+    }
+}
 
 
 #Preview {
