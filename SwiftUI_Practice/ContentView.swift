@@ -1,24 +1,30 @@
-//
-//  ContentView.swift
-//  SwiftUI_Practice
-//
-//  Created by Aytaç Bulanık on 26.01.2025.
-//
+    //
+    //  ContentView.swift
+    //  SwiftUI_Practice
+    //
+    //  Created by Aytaç Bulanık on 26.01.2025.
+    //
 
 import SwiftUI
 
 
 struct ContentView: View {
-    @State private var circleProgress : Float = 0.5
-    private var circleCount : Int {
-        Int( circleProgress * 100 )
-    }
+    let students = ["Ahmet","Ayşe","Hülya","Necmi"]
+    @State private var selectedStudent = "Ahmet"
     var body: some View {
-        ZStack {
-            Color.black.frame(maxWidth : .infinity)
-                .ignoresSafeArea()
+        NavigationStack {
+            Form {
+                Picker("Bir öğrenci seçin" , selection: $selectedStudent) {
+                    ForEach(students , id: \.self) {
+                        Text($0)
+                    }
+                }.pickerStyle(.inline)
+                    
+                    
+            }
+            .navigationTitle("Select a Student")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        
     }
 }
 
