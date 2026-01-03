@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct FirstScreenUI : View {
-    @State private var quantity = 1
-    @State private var maxQuantity = 5
+    
     var body: some View {
-        HStack {
-            Text("Miktar: \(quantity)")
-            Spacer()
-            Stepper("", value: $quantity, in: 1...maxQuantity)
-                .labelsHidden()
+        VStack(spacing: 20) {
+            Text("Dikdörtgen ilk örnek").font(.largeTitle).padding()
+            Rectangle().padding()
+            
+            Rectangle().fill(Color.red).cornerRadius(10).padding()
+            
+            RoundedRectangle(cornerRadius: 20).padding().foregroundStyle(.blue)
+            
+            RoundedRectangle(cornerRadius: 10).stroke(Color.blue,lineWidth:4).padding()
         }
-        .padding()
+        
     }
 }
 
