@@ -9,21 +9,25 @@ import SwiftUI
 
 
 struct ContentView: View {
-    let students = ["Ahmet","Ayşe","Hülya","Necmi"]
-    @State private var selectedStudent = "Ahmet"
+    @State private var billAmount = 0.0
+    @State private var numberOfPeople = 2
+    @State private var tipPercent = 20
+    
+    let tipArray = [0,10,25,20,25]
+    
     var body: some View {
-        NavigationStack {
-            Form {
-                Picker("Bir öğrenci seçin" , selection: $selectedStudent) {
-                    ForEach(students , id: \.self) {
-                        Text($0)
+        Form {
+            Section {
+                TextField("Hesap tutarını giriniz", value: $billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).keyboardType(.decimalPad) // veriyi double olarak alıyoruz ve telefonun varsayılan para birimi olarak yazdırıyoruz.
+                Picker("Select People" , selection: $numberOfPeople) {
+                    ForEach(2..<100) {
+                        Text("\($0) people")
                     }
-                }.pickerStyle(.inline)
-                    
-                    
+                }
             }
-            .navigationTitle("Select a Student")
-            .navigationBarTitleDisplayMode(.inline)
+            Section {
+                Text(billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+            }
         }
     }
 }
