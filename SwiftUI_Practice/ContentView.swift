@@ -15,13 +15,17 @@ struct ContentView: View {
     
     let tipArray = [0,10,25,20,15]
     
+    var totalPercentBill : Double {
+        return (billAmount * (1.0 + Double(tipPercent) / 100.0) ) / Double(numberOfPeople)
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     TextField("Hesap tutarını giriniz", value: $billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).keyboardType(.decimalPad) // veriyi double olarak alıyoruz ve telefonun varsayılan para birimi olarak yazdırıyoruz.
                     Picker("Select People" , selection: $numberOfPeople) {
-                        ForEach(2..<100) {
+                        ForEach(2..<11, id: \.self) {
                             Text("\($0) people")
                         }
                     }
@@ -36,7 +40,7 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
                 }
                 Section {
-                    Text(billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalPercentBill, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
             .navigationTitle("View Split")
