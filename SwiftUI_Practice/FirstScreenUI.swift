@@ -11,14 +11,9 @@ struct FirstScreenUI : View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Dikdörtgen ilk örnek").font(.largeTitle).padding()
-            Rectangle().padding()
+            Text("Insent Örnek").font(.largeTitle)
             
-            Rectangle().fill(Color.red).cornerRadius(10).padding()
-            
-            RoundedRectangle(cornerRadius: 20).padding().foregroundStyle(.blue)
-            
-            RoundedRectangle(cornerRadius: 10).stroke(Color.blue,lineWidth:4).padding()
+            Circle().inset(by: 30) // şekilin frame ile arasına boşluk bırakıyor. padding gibi davranıyor. insent sadece şekilllere verilir.
         }
         
     }
