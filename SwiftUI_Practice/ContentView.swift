@@ -15,6 +15,10 @@ struct ContentView: View {
     
     let tipArray = [0,10,25,20,15]
     
+    var totalBill : Double {
+        return billAmount * (Double(tipPercent) / 100 + 1.0)
+    }
+    
     var totalPercentBill : Double {
         return (billAmount * (1.0 + Double(tipPercent) / 100.0) ) / Double(numberOfPeople)
     }
@@ -39,7 +43,10 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                Section {
+                Section ("Toplam Hesap"){
+                    Text(totalBill , format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                }
+                Section("Kişi Başı Tutar") {
                     Text(totalPercentBill, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 }
             }
