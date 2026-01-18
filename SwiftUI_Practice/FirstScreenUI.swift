@@ -9,11 +9,18 @@ import SwiftUI
 
 struct FirstScreenUI : View {
     
+    let angularGradient = AngularGradient(colors: [.pink,.purple,.pink], center: .center, angle: Angle(degrees: 90)) // center parametresi gradientin nerden başlayacağını gösteriyor. angle değeri ise açısal olarak yön vermemizi sağlıyor.
+    
+    let notAngularGradient = AngularGradient(colors: [.pink,.purple], center: .top, angle: Angle(degrees: 0))
+    
     var body: some View {
         VStack(spacing: 20) {
-            Text("Insent Örnek").font(.largeTitle)
+            Text("Angular Gradient Örnek").font(.largeTitle)
             
-            Circle().inset(by: 30) // şekilin frame ile arasına boşluk bırakıyor. padding gibi davranıyor. insent sadece şekilllere verilir.
+            Rectangle().fill(angularGradient)
+            
+            Rectangle().fill(notAngularGradient)
+            
         }
         
     }
