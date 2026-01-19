@@ -9,18 +9,14 @@ import SwiftUI
 
 struct FirstScreenUI : View {
     
-    let angularGradient = AngularGradient(colors: [.pink,.purple,.pink], center: .center, angle: Angle(degrees: 90)) // center parametresi gradientin nerden başlayacağını gösteriyor. angle değeri ise açısal olarak yön vermemizi sağlıyor.
-    
-    let notAngularGradient = AngularGradient(colors: [.pink,.purple], center: .top, angle: Angle(degrees: 0))
+    let lineerGradient = LinearGradient(colors: [.pink , .purple], startPoint: .leading, endPoint: .trailing)
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Angular Gradient Örnek").font(.largeTitle)
-            
-            Rectangle().fill(angularGradient)
-            
-            Rectangle().fill(notAngularGradient)
-            
+        VStack {
+            Button(action : {}) {
+                Text("Click Me").bold().font(.largeTitle).padding().foregroundStyle(Color.white)
+            }.background(lineerGradient)
+                
         }
         
     }
