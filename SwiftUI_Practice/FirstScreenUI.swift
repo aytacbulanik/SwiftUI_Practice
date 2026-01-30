@@ -9,14 +9,19 @@ import SwiftUI
 
 struct FirstScreenUI : View {
     
-    let lineerGradient = LinearGradient(colors: [.pink , .purple], startPoint: .leading, endPoint: .trailing)
     
+    @State private var showAlert = false // alertin aktif olmasını sağlayan değişkendir. alerte parametre olarak göndereceğiz.
     var body: some View {
-        VStack {
-            Button(action : {}) {
-                Text("Click Me").bold().font(.largeTitle).padding().foregroundStyle(Color.white)
-            }.background(lineerGradient)
-                
+        Button("Alert Göster"){
+            showAlert = true
+        }
+        .alert("Silme İşlemi", isPresented: $showAlert) {
+            Button("İptal", role: .cancel) { }
+            Button("Sil", role: .destructive) {
+                // Silme işlemini yap
+            }
+        } message: {
+            Text("Bu öğeyi silmek istediğinizden emin misiniz?")
         }
         
     }
