@@ -10,20 +10,15 @@ import SwiftUI
 struct FirstScreenUI : View {
     
     
-    @State private var showAlert = false // alertin aktif olmasını sağlayan değişkendir. alerte parametre olarak göndereceğiz.
+    @State private var alertShow = false
+    
+    var alertController = Alert(title: Text("Hata"), message: Text("Bu bir alert mesajıdır"), primaryButton: .default(Text("Tamam"), action: {}), secondaryButton: .cancel())
+    
     var body: some View {
-        Button("Alert Göster"){
-            showAlert = true
+        Button("Show Alert") {
+            alertShow = true
         }
-        .alert("Silme İşlemi", isPresented: $showAlert) {
-            Button("İptal", role: .cancel) { }
-            Button("Sil", role: .destructive) {
-                // Silme işlemini yap
-            }
-        } message: {
-            Text("Bu öğeyi silmek istediğinizden emin misiniz?")
-        }
-        
+        .alert("Alert Gösteriliyor", isPresented: $alertShow, actions: {})
     }
 }
 
