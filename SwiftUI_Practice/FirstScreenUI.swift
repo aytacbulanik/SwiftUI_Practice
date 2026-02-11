@@ -7,56 +7,60 @@
 
 import SwiftUI
 
-struct FirstScreenUI : View {
-    @State private var iconColor: Color = .orange
-    @State private var helpText: String = "Yardıma İhtiyacım var"
+struct DetayVerileri : Identifiable {
+    var id = UUID()
+    let message : String
+    let image : Image
+}
 
+struct FirstScreenUI : View {
+    
+    @State private var gidenVeri : DetayVerileri? = nil
+    @State private var kullaniciMesaji = ""
+    
     var body: some View {
         VStack(spacing: 20) {
-            Text("Context Menu Örnek 1")
+            Text("Burası Ana Ekrandır")
                 .font(.largeTitle)
-                .foregroundStyle(.blue)
-
+                .foregroundStyle(.red)
+            Spacer()
             HStack {
-                Text(helpText)
-                Spacer()
-                Image(systemName: "questionmark.diamond.fill")
-                    .font(.title)
-                    .foregroundStyle(iconColor)
-                    .frame(width: 50, height: 50)
-                    .contextMenu {
-                        Button {
-                            // Rengi döngüsel değiştir
-                            if iconColor == .orange {
-                                iconColor = .cyan
-                            } else if iconColor == .cyan {
-                                iconColor = .green
-                            } else {
-                                iconColor = .orange
-                            }
-                        } label: {
-                            Label("Renk değiştir", systemImage: "circle.lefthalf.fill")
-                        }
-
-                        Button {
-                            helpText = "Destek talebin alındı!"
-                        } label: {
-                            Label("Destek Talebi Oluştur", systemImage: "paperplane")
-                        }
-
-                        Button(role: .destructive) {
-                            iconColor = .orange
-                            helpText = "Yardıma İhtiyacım var"
-                        } label: {
-                            Label("Sıfırla", systemImage: "arrow.counterclockwise")
-                        }
-                    }
+                Text("Mesajınızı Giriniz : ")
+                TextField("Mesajınız... ", text: $kullaniciMesaji)
             }
-            .padding(.horizontal)
+            Button("Veri Gönder") {
+                // diğer ekrana gönderilecek veri oluşturuluyor.
+                self.gidenVeri = DetayVerileri(message: kullaniciMesaji, image: Image("image-sun"))
+            }// diğer ekrana gidecek veri yakalandığı için view nesnesi içerisinde parametre olarak gönderiliyor.
+            .sheet(item: $gidenVeri) { veri in
+                DetayEkranı(detayVeriler: veri)
+            }
+            Spacer()
         }
+        .padding()
     }
 }
 
+struct DetayEkranı : View {
+    
+    @Environment(\.dismiss) var dismiss
+    let detayVeriler : DetayVerileri
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Mesajınız : ") + Text(detayVeriler.message)
+                .font(.title)
+                .foregroundStyle(.red)
+            detayVeriler.image.resizable()
+            
+            Button("Geri Dön") {
+                dismiss()
+            }
+            .font(.system(size: 30 , weight: .bold))
+        }
+        .padding(.top,40)
+    }
+}
 
 #Preview {
     FirstScreenUI()
