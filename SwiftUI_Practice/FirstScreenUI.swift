@@ -7,60 +7,35 @@
 
 import SwiftUI
 
-struct DetayVerileri : Identifiable {
-    var id = UUID()
-    let message : String
-    let image : Image
-}
-
 struct FirstScreenUI : View {
     
-    @State private var gidenVeri : DetayVerileri? = nil
-    @State private var kullaniciMesaji = ""
-    
+    @State private var gorunsunPopover = false
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Burası Ana Ekrandır")
-                .font(.largeTitle)
-                .foregroundStyle(.red)
-            Spacer()
-            HStack {
-                Text("Mesajınızı Giriniz : ")
-                TextField("Mesajınız... ", text: $kullaniciMesaji)
+        ZStack {
+            Color.black
+            
+            Button(action : {
+                self.gorunsunPopover = true
+            }, label : {
+                Text("Tıkla").font(.largeTitle).foregroundStyle(.white)
+            })
+            .popover(isPresented: $gorunsunPopover, arrowEdge : .top) {
+                VStack(spacing: 20) {
+                    Text("Popover Örnek - 1")
+                    Text("Bool değeri değişti ve popover bu yüzden göründü").font(.title)
+                        .foregroundStyle(.cyan)
+                        .background(.gray)
+                }
+                .padding()
             }
-            Button("Veri Gönder") {
-                // diğer ekrana gönderilecek veri oluşturuluyor.
-                self.gidenVeri = DetayVerileri(message: kullaniciMesaji, image: Image("image-sun"))
-            }// diğer ekrana gidecek veri yakalandığı için view nesnesi içerisinde parametre olarak gönderiliyor.
-            .sheet(item: $gidenVeri) { veri in
-                DetayEkranı(detayVeriler: veri)
-            }
-            Spacer()
+            
         }
-        .padding()
+        .edgesIgnoringSafeArea(.vertical)
+        
     }
+    
 }
 
-struct DetayEkranı : View {
-    
-    @Environment(\.dismiss) var dismiss
-    let detayVeriler : DetayVerileri
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Mesajınız : ") + Text(detayVeriler.message)
-                .font(.title)
-                .foregroundStyle(.red)
-            detayVeriler.image.resizable()
-            
-            Button("Geri Dön") {
-                dismiss()
-            }
-            .font(.system(size: 30 , weight: .bold))
-        }
-        .padding(.top,40)
-    }
-}
 
 #Preview {
     FirstScreenUI()

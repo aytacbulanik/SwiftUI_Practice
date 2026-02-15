@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var flags = ["flag.slash.circle.fill","flag.circle","house.and.flag.fill",
+    @State private var flags = ["flag.slash.circle.fill","flag.circle","house.and.flag.fill",
                  "flag.pattern.checkered.lc"].shuffled()
-    var correctAnswer : Int = Int.random(in: 0...2)
+    @State private var correctAnswer : Int = Int.random(in: 0...2)
     
     @State private var scoreTitle = ""
     @State private var alertState = false
@@ -28,10 +28,13 @@ struct ContentView: View {
                 ForEach (0..<3){ number in
                     Button {
                         sayAnswer(number)
+                        
                     } label: {
                         Image(systemName: "\(flags[number])")
                     }
                     .alert("Kontrol Yapıldı",isPresented : $alertState) {
+                        Button("Countinue", action: askQuestion)
+                    } message: {
                         Text("\(scoreTitle)")
                     }
                 }
@@ -47,6 +50,10 @@ struct ContentView: View {
             scoreTitle = "Wrong"
         }
         alertState = true
+    }
+    func askQuestion() {
+        flags.shuffle()
+        correctAnswer = Int.random(in: 0...2)
     }
 }
 
