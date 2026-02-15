@@ -6,32 +6,32 @@
     //
 
 import SwiftUI
-
+struct Contact: Identifiable {
+    let id = UUID()
+    let name: String
+    let detail: String
+}
 struct FirstScreenUI : View {
     
-    @State private var gorunsunPopover = false
+    @State private var selection: Contact?
+
+    let contacts = [
+        Contact(name: "Ayşe", detail: "iOS Developer"),
+        Contact(name: "Mehmet", detail: "Designer"),
+        Contact(name: "Elif", detail: "QA Engineer")
+    ]
     var body: some View {
-        ZStack {
-            Color.black
-            
-            Button(action : {
-                self.gorunsunPopover = true
-            }, label : {
-                Text("Tıkla").font(.largeTitle).foregroundStyle(.white)
-            })
-            .popover(isPresented: $gorunsunPopover, arrowEdge : .top) {
-                VStack(spacing: 20) {
-                    Text("Popover Örnek - 1")
-                    Text("Bool değeri değişti ve popover bu yüzden göründü").font(.title)
-                        .foregroundStyle(.cyan)
-                        .background(.gray)
-                }
-                .padding()
-            }
-            
+        List(contacts) { contact in
+            Button(contact.name) { selection = contact }
         }
-        .edgesIgnoringSafeArea(.vertical)
-        
+        .popover(item: $selection, arrowEdge: .trailing) { selected in
+            VStack(spacing: 8) {
+                Text(selected.name).font(.title2).bold()
+                Text(selected.detail)
+                Button("Kapat") { selection = nil }
+            }
+            .padding()
+        }
     }
     
 }
