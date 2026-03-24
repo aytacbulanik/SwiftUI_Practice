@@ -12,14 +12,14 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var sleepAmount = 8.0
+    @State private var dateNow = Date.now
     var body: some View {
-        Stepper("\(sleepAmount.formatted()) hours" , value: $sleepAmount , in: 4...12 , step: 0.25)
-            .padding()
-        Stepper("Adedi Ayarla (0–10, adım 2)",
-                        value: $sleepAmount,
-                        in: 0...10,
-                        step: 2)
-
+        VStack {
+            Stepper("\(sleepAmount.formatted()) hours" , value: $sleepAmount , in: 4...12 , step: 0.25)
+            DatePicker("The date is" , selection: $dateNow, in: ...Date()) // in parametresinde verilen aralık geçmişi seçmemizi engeller
+                .labelsHidden() // label ı pasif yapar ve ortalar
+        }
+        .padding()
     }
 }
 
