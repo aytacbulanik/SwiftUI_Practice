@@ -11,68 +11,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var objects = ["Rock" , "Scissors" , "Paper"]
-    @State var randomNumber = Int.random(in: 0..<3)
-    @State private var chose = ""
-    @State private var P1Score = 0
-    @State private var state = false
-    
+    @State private var sleepAmount = 8.0
     var body: some View {
-       Text("Welcome to the game")
-            .font(.largeTitle)
-            .foregroundStyle(.orange)
-        HStack (spacing : 20) {
-            Text("Your Score: \(P1Score)")
-                .font(Font.largeTitle.bold())
-            
-        }
-        
-        ForEach(objects , id: \.self) { choise in
-            Button(choise) {
-                switch objects[self.randomNumber] {
-                case "Rock" :
-                    if choise == "Paper" {
-                        self.state = true
-                        self.P1Score += 1
-                    } else {
-                        self.state = false
-                    }
-                case "Scissors" :
-                    if choise == "Rock" {
-                        self.state = true
-                        self.P1Score += 1
-                    }else {
-                        self.state = false
-                    }
-                case "Paper" :
-                    if choise == "Scissors" {
-                        self.state = true
-                        self.P1Score += 1
-                    }else {
-                        self.state = false
-                    }
-                default:
-                    break
-                }
-                randomNumber = Int.random(in: 0..<3)
-            }
-            .frame(width: 200 , height: 50)
+        Stepper("\(sleepAmount.formatted()) hours" , value: $sleepAmount , in: 4...12 , step: 0.25)
             .padding()
-            .background(.blue)
-            .cornerRadius(14)
-            .foregroundStyle(.white)
-        }
-        Text(objects[self.randomNumber])
-            .foregroundStyle(.orange)
-            .font(.system(size: 40))
-            .padding()
-        Text(state ? "DOĞRU" : "YANLIŞ")
-            .padding()
-            .background(state ? .green : .red)
-            .foregroundStyle(.white)
-            .font(.title)
-            
-        Spacer()
+        Stepper("Adedi Ayarla (0–10, adım 2)",
+                        value: $sleepAmount,
+                        in: 0...10,
+                        step: 2)
+
     }
 }
 
